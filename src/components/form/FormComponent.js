@@ -1,7 +1,22 @@
 import React from 'react'
 import { Grid,Form,Segment,Button} from 'semantic-ui-react';
+import { options } from '../../utils/constants';
 
-const FormComponent = () => {
+const FormComponent = ({info,setInfo,handleFormSubmit}) => {
+
+  const handleInputChange=(e)=>{
+    // const name=e.target.name
+    // const value=e.target.value
+    const {name,value}=e.target
+    setInfo({...info,[name]:value})
+
+  }
+  const handleOptionChange=(e,values)=>{
+    const {name,value}=values
+    setInfo({...info,[name]:value.toUpperCase()})
+
+  }
+
     return (
         <Grid textAlign="center" verticalAlign="middle">
          <Grid.Column style={{ width: 300 }}>
@@ -19,7 +34,7 @@ const FormComponent = () => {
             </div>
             </div>
             <h2 className="contact-header">Add Contact</h2>
-            <Form size="large" >
+        <Form size="large" onSubmit={handleFormSubmit} >
           <Segment stacked>
             <Form.Input
               fluid
@@ -27,8 +42,8 @@ const FormComponent = () => {
               icon="user"
               iconPosition="left"
               placeholder="Name"
-              value={null}
-              onChange={null}
+              value={info.username}
+              onChange={handleInputChange}
               required
             />
             <Form.Input
@@ -37,18 +52,18 @@ const FormComponent = () => {
               icon="phone"
               iconPosition="left"
               placeholder="Phone Number"
-              value={null}
-              onChange={null}
+              value={info.phoneNumber}
+              onChange={handleInputChange}
               required
             />
             <Form.Dropdown
-              options={null}
-              onChange={null}
+              options={options}
+              onChange={handleOptionChange}
               placeholder="Gender"
               name="gender"
               fluid
               selection
-              value={null}
+              value={info.gender.toUpperCase()}
               required
             />
             <Button color="teal" fluid size="large">
