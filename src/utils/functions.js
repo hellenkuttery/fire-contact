@@ -41,7 +41,7 @@ export const useFetch=()=>{
 
 export const deleteInfo=(id)=>{
     const db = getDatabase();
-    // const userRef = ref(db, 'contact');
+    // const userRef = ref(db, 'contact/');
     remove(ref(db,"contact/"+id))
     successNote("Deleted")
 }
